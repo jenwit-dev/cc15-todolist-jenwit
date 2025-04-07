@@ -2,10 +2,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900&family=Source+Sans+Pro:wght@400;600;700&display=swap");
 
 // CSS Variables
-$primary: #db4c3f;
+// $primary: #db4c3f;
+$primary: rgb(98, 31, 255);
 $grey-light: #eaeaea;
 $grey-dark: #808080;
 $white: #fff;
+$header-height: 44px;
+$sidebar-width: 300px;
 
 // Global Reset
 *,
