@@ -10,6 +10,19 @@ import Header from "../components/Header";
 import ListItem from "../components/ListItem.jsx";
 
 function App() {
+  const generalLists = [
+    { id: 1, text: "Inbox", icon: <FaInbox />, active: true },
+    { id: 2, text: "Today", icon: <FaCalendar />, active: false },
+    { id: 3, text: "Next 7 Days", icon: <FaCalendarAlt />, active: false },
+  ];
+
+  // <ListItem text="Project-A" icon={<FaInbox />} active={true} />
+  // <ListItem text="Project-B" icon={<FaInbox />} active={false} />;
+  const projectLists = [
+    { id: 4, text: "Project-A", icon: <FaInbox />, active: true },
+    { id: 5, text: "Project-B", icon: <FaInbox />, active: false },
+  ];
+
   return (
     <div className="todo">
       <div className="todo__header">
@@ -31,13 +44,21 @@ function App() {
                 <FaCalendarAlt className="list__item__icon" />
                 <p className="list__item__text">Next 7 days</p>
               </li> */}
-              <ListItem text="Inbox" icon={<FaInbox />} active={true} />
+              {generalLists.map((obj) => (
+                <ListItem
+                  key={obj.id}
+                  text={obj.text}
+                  icon={obj.icon}
+                  active={obj.active}
+                />
+              ))}
+              {/* <ListItem text="Inbox" icon={<FaInbox />} active={true} />
               <ListItem text="Today" icon={<FaCalendar />} active={false} />
               <ListItem
                 text="Next 7 days"
                 icon={<FaCalendarAlt />}
                 active={false}
-              />
+              /> */}
             </ul>
           </section>
           <section className="sidebar__category">
@@ -51,8 +72,22 @@ function App() {
               </div>
               {/* List */}
               <ul className="list">
-                <ListItem text="Project-A" icon={<FaInbox />} active={true} />
-                <ListItem text="Project-B" icon={<FaInbox />} active={false} />
+                {projectLists.map((obj) => {
+                  obj.key = obj.id;
+                  delete obj.id;
+                  return <ListItem {...obj} />;
+                })}
+                {/* {projectLists.map((obj) => (
+                  <ListItem
+                    key={obj.id}
+                    // text={obj.text}
+                    // icon={obj.icon}
+                    // active={obj.active}
+                    {...obj} // แทรก expression แล้วก็ spread obj เป็นการ spread props
+                  />
+                ))} */}
+                {/* <ListItem text="Project-A" icon={<FaInbox />} active={true} />
+                <ListItem text="Project-B" icon={<FaInbox />} active={false} /> */}
               </ul>
             </div>
           </section>
