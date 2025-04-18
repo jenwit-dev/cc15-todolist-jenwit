@@ -8,6 +8,7 @@ import {
 } from "react-icons/fa";
 import Header from "../components/Header";
 import ListItem from "../components/ListItem.jsx";
+import Lists from "../components/Lists.jsx";
 
 function App() {
   const generalLists = [
@@ -31,8 +32,8 @@ function App() {
       <div className="todo__sidebar">
         <aside className="sidebar">
           <section className="sidebar__category">
-            <ul className="list">
-              {/* <li className="list__item">
+            {/* <ul className="list"> */}
+            {/* <li className="list__item">
                 <FaInbox className="list__item__icon" />
                 <p className="list__item__text">Inbox</p>
               </li>
@@ -44,22 +45,23 @@ function App() {
                 <FaCalendarAlt className="list__item__icon" />
                 <p className="list__item__text">Next 7 days</p>
               </li> */}
-              {generalLists.map((obj) => (
-                <ListItem
-                  key={obj.id}
-                  text={obj.text}
-                  icon={obj.icon}
-                  active={obj.active}
-                />
-              ))}
-              {/* <ListItem text="Inbox" icon={<FaInbox />} active={true} />
+            {/* {generalLists.map((obj) => (
+              <ListItem
+                key={obj.id}
+                text={obj.text}
+                icon={obj.icon}
+                active={obj.active}
+              />
+            ))} */}
+            {/* <ListItem text="Inbox" icon={<FaInbox />} active={true} />
               <ListItem text="Today" icon={<FaCalendar />} active={false} />
               <ListItem
                 text="Next 7 days"
                 icon={<FaCalendarAlt />}
                 active={false}
               /> */}
-            </ul>
+            {/* </ul> */}
+            <Lists data={generalLists} />
           </section>
           <section className="sidebar__category">
             <div className="accordion">
@@ -71,13 +73,14 @@ function App() {
                 </li>
               </div>
               {/* List */}
-              <ul className="list">
+              <Lists data={projectLists} />
+              {/* <ul className="list">
                 {projectLists.map((obj) => {
                   obj.key = obj.id;
                   delete obj.id;
                   return <ListItem {...obj} />;
-                })}
-                {/* {projectLists.map((obj) => (
+                })} */}
+              {/* {projectLists.map((obj) => (
                   <ListItem
                     key={obj.id}
                     // text={obj.text}
@@ -86,9 +89,9 @@ function App() {
                     {...obj} // แทรก expression แล้วก็ spread obj เป็นการ spread props
                   />
                 ))} */}
-                {/* <ListItem text="Project-A" icon={<FaInbox />} active={true} />
+              {/* <ListItem text="Project-A" icon={<FaInbox />} active={true} />
                 <ListItem text="Project-B" icon={<FaInbox />} active={false} /> */}
-              </ul>
+              {/* </ul> */}
             </div>
           </section>
         </aside>
