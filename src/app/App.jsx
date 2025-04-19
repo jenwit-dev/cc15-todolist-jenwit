@@ -9,6 +9,7 @@ import {
 import Header from "../components/Header";
 import ListItem from "../components/ListItem.jsx";
 import Lists from "../components/Lists.jsx";
+import TodoHeader from "../components/Todo/TodoHeader.jsx";
 
 function App() {
   const generalLists = [
@@ -96,7 +97,15 @@ function App() {
           </section>
         </aside>
       </div>
-      <div className="todo__content">TodoContent</div>
+      <div className="todo__content">
+        <main className="todo__container">
+          {/* Header */}
+          <TodoHeader />
+          {/* CreateTodo */}
+
+          {/* TodoLists */}
+        </main>
+      </div>
     </div>
   );
 }
