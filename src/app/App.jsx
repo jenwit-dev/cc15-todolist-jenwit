@@ -10,6 +10,7 @@ import Header from "../components/Header";
 import ListItem from "../components/ListItem.jsx";
 import Lists from "../components/Lists.jsx";
 import TodoHeader from "../components/Todo/TodoHeader.jsx";
+import TodoCreate from "../components/Todo/TodoCreate.jsx";
 
 function App() {
   const generalLists = [
@@ -102,6 +103,7 @@ function App() {
           {/* Header */}
           <TodoHeader />
           {/* CreateTodo */}
+          <TodoCreate />
 
           {/* TodoLists */}
         </main>
