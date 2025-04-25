@@ -22,8 +22,7 @@
 
     // other css
     overflow-y: scroll;
-    padding: 20px 30px;
-    padding-top: 0;
+    padding: 0px;
   }
 }
 
@@ -87,5 +86,6 @@
 .todo__container {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 15px;
+  padding: 20px;
 }
