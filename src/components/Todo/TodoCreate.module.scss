@@ -2,7 +2,7 @@
 
 .todo__create {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   align-items: center;
   cursor: pointer;
 
@@ -26,6 +26,11 @@
     align-items: center;
     justify-content: center;
     line-height: 2.2rem;
+    position: relative;
+    &__plus {
+      position: absolute;
+      top: 0px;
+    }
   }
 
   &__text {

@@ -8,7 +8,9 @@
   border-radius: 4px;
   font-size: 1.6rem;
   color: $grey-dark;
-  padding: 10px 20px;
+  padding: 10px;
+  padding-left: 4px;
+  position: relative;
 
   &:hover {
     background-color: $grey-light;
@@ -18,14 +20,37 @@
     color: $grey-dark;
     height: 16px;
     width: 16px;
-    display: block;
+    // display: flex;
+    // flex-basis: 160px;
     border: 1px solid $grey-dark;
     border-radius: 16px;
-    text-align: center;
-    line-height: 16px;
+    // text-align: center;
+    // line-height: 16px;
+    position: absolute;
+    top: 12px;
+    // background-color: aqua;
+    &__icon {
+      display: none;
+    }
+
+    &:hover &__icon {
+      display: inline;
+    }
+
+    &__done &__icon {
+      display: inline;
+      // display: flex;
+      // justify-content: center;
+      // align-items: center;
+    }
   }
   &__task {
+    margin-left: 28px;
     flex: 1;
+
+    &__done {
+      text-decoration: line-through;
+    }
   }
   &__date {
   }

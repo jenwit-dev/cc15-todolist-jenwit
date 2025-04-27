@@ -9,7 +9,9 @@ import styles from "./TodoCreate.module.scss";
 function TodoCreate() {
   return (
     <div className={styles.todo__create}>
-      <span className={styles.todo__create__button}>+</span>
+      <span className={styles.todo__create__button}>
+        <div className={styles.todo__create__button__plus}>+</div>
+      </span>
       <h3 className={styles.todo__create__text}>Add Task</h3>
     </div>
   );
