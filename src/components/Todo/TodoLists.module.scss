@@ -60,5 +60,13 @@
     gap: 10px;
     justify-content: space-evenly;
     font-size: 1.2rem;
+
+    &__edit:hover {
+      color: $primary;
+    }
+
+    &__delete:hover {
+      color: $primary;
+    }
   }
 }
