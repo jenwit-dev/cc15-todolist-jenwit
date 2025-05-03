@@ -1,16 +1,24 @@
 import { useState } from "react";
 
-import TodoCreate from "./TodoCreate";
-import TodoLists from "./TodoLists";
 import { Button } from "../common/button/Button";
 import styles from "./TodoForm.module.scss";
 
 function TodoForm(props) {
-  const [isError, setIsError] = useState(true);
-  // const [isCancel, setIsCancel] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [taskInput, setTaskInput] = useState("");
+
+  const handleChangeInput = function (event) {
+    // console.log("typing...");
+    if (isError) setIsError(false);
+    setTaskInput(event.target.value);
+  };
 
   const handleSubmit = function (event) {
     event.preventDefault();
+    if (taskInput.trim() === "") {
+      setIsError(true);
+      return;
+    }
     console.log("submit");
   };
 
@@ -22,7 +30,12 @@ function TodoForm(props) {
 
   return (
     <form className={styles.todo__form__container} onSubmit={handleSubmit}>
-      <input className={styles.todo__form__input} placeholder="Task Name" />
+      <input
+        className={styles.todo__form__input}
+        placeholder="Task Name"
+        onChange={handleChangeInput}
+        value={taskInput}
+      />
       <div className={styles.todo__form__footer}>
         {isError ? (
           <p className={styles.todo__error}>Title is required</p>
