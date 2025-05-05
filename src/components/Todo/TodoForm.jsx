@@ -20,6 +20,16 @@ function TodoForm(props) {
       return;
     }
     console.log("submit");
+
+    const newTodo = {
+      id: props.data.length + 1,
+      task: taskInput,
+      status: false,
+      due_date: "2025-05-05",
+    };
+    const newTodoLists = [newTodo, ...props.data];
+    props.setTodo(newTodoLists);
+    props.setIsOpenForm(false);
   };
 
   const handleCancel = function (event) {

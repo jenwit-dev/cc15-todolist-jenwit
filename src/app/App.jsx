@@ -1,4 +1,5 @@
 import "./App.scss";
+import { useState } from "react";
 import {
   FaHome,
   FaInbox,
@@ -14,7 +15,30 @@ import TodoCreate from "../components/Todo/TodoCreate.jsx";
 import TodoLists from "../components/Todo/TodoLists.jsx";
 import TodoForm from "../components/Todo/TodoForm.jsx";
 
+const data = [
+  {
+    id: 1,
+    task: "Suspendisse potenti.",
+    status: false,
+    due_date: "2023-04-26",
+  },
+  {
+    id: 2,
+    task: "In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.",
+    status: false,
+    due_date: "2023-05-08",
+  },
+  {
+    id: 3,
+    task: "Aenean fermentum. Donec ut mauris eget massa tempor convallis.",
+    status: false,
+    due_date: "2023-04-30",
+  },
+];
+
 function App() {
+  const [allTodos, setAllTodos] = useState(data);
+
   const generalLists = [
     { id: 1, text: "Inbox", icon: <FaInbox />, active: true },
     { id: 2, text: "Today", icon: <FaCalendar />, active: false },
@@ -105,9 +129,9 @@ function App() {
           {/* Header */}
           <TodoHeader />
           {/* CreateTodo */}
-          <TodoCreate />
+          <TodoCreate setTodo={setAllTodos} data={allTodos} />
           {/* TodoLists */}
-          <TodoLists />
+          <TodoLists data={allTodos} />
         </main>
       </div>
     </div>

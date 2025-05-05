@@ -10,7 +10,7 @@ import styles from "./TodoCreate.module.scss";
 
 // JS value ไม่สามารถทำให้ React Rerender ได้
 
-function TodoCreate() {
+function TodoCreate(props) {
   const [isOpenForm, setIsOpenForm] = useState(false);
   console.log(isOpenForm);
 
@@ -22,7 +22,12 @@ function TodoCreate() {
   return (
     <>
       {isOpenForm ? (
-        <TodoForm textSubmit="Add Task" setIsOpenForm={setIsOpenForm} />
+        <TodoForm
+          textSubmit="Add Task"
+          setIsOpenForm={setIsOpenForm}
+          setTodo={props.setTodo}
+          data={props.data}
+        />
       ) : (
         <div className={styles.todo__create} onClick={handleClick}>
           <span className={styles.todo__create__button}>
