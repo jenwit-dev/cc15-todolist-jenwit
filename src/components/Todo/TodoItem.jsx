@@ -6,9 +6,9 @@ import TodoForm from "./TodoForm";
 import styles from "./TodoItem.module.scss";
 
 function TodoItem(props) {
-  const { task, done, date } = props;
+  const { id, task, done, date } = props;
   const [isOpenForm, setIsOpenForm] = useState(false);
-
+  console.log(id);
   const handleClick = () => {
     return setIsOpenForm(!isOpenForm);
   };

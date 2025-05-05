@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { nanoid } from "nanoid";
 
 import { Button } from "../common/button/Button";
 import styles from "./TodoForm.module.scss";
@@ -22,7 +23,7 @@ function TodoForm(props) {
     console.log("submit");
 
     const newTodo = {
-      id: props.data.length + 1,
+      id: nanoid(),
       task: taskInput,
       status: false,
       due_date: "2025-05-05",
