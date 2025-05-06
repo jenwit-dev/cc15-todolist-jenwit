@@ -1,7 +1,7 @@
 import TodoItem from "./TodoItem";
 import styles from "./TodoLists.module.scss";
 
-function TodoLists({ data, deleteTodo, toggleTodo }) {
+function TodoLists({ data, deleteTodo, toggleTodo, editTodo }) {
   return (
     <ul className={styles.todo__lists}>
       {data.map(({ id, task, status, due_date }) => (
@@ -12,7 +12,8 @@ function TodoLists({ data, deleteTodo, toggleTodo }) {
           date={due_date}
           id={id}
           deleteTodo={deleteTodo}
-          toggleTodo={toggleTodo}
+          // toggleTodo={toggleTodo}
+          editTodo={editTodo}
         />
       ))}
     </ul>

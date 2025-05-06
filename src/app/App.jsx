@@ -59,22 +59,38 @@ function App() {
     setAllTodos((prev) => prev.filter((item) => item.id !== todoId));
   };
 
-  const toggleTodo = (todoId, done) => {
-    // return console.log(todoId);
-    // return console.log(allTodos.findIndex((item) => item.id === todoId));
-    const newAllTodos = [...allTodos];
-    // return console.log(newAllTodos.findIndex((item) => item.id === todoId));
-    newAllTodos[newAllTodos.findIndex((item) => item.id === todoId)].status =
-      !done;
-    // return console.log(
-    //   newAllTodos[newAllTodos.findIndex((item) => item.id === todoId)]
-    // );
-    setAllTodos(newAllTodos);
+  // const toggleTodo = (todoId, done) => {
+  //   // return console.log(todoId);
+  //   // return console.log(allTodos.findIndex((item) => item.id === todoId));
+  //   const newAllTodos = [...allTodos];
+  //   // return console.log(newAllTodos.findIndex((item) => item.id === todoId));
+  //   newAllTodos[newAllTodos.findIndex((item) => item.id === todoId)].status =
+  //     !done;
+  //   // return console.log(
+  //   //   newAllTodos[newAllTodos.findIndex((item) => item.id === todoId)]
+  //   // );
+  //   setAllTodos(newAllTodos);
 
-    // setAllTodos(
-    //   (prev) =>
-    //     (prev[prev.findIndex((item) => item.id === todoId)].status = !done)
-    // );
+  //   // setAllTodos(
+  //   //   (prev) =>
+  //   //     (prev[prev.findIndex((item) => item.id === todoId)].status = !done)
+  //   // );
+  // };
+
+  const editTodo = (todoId, newTodoObj) => {
+    // console.log(todoId, newTodoObj);
+    // const newTodoLists = allTodos.map((todo) => {
+    //   if (todo.id !== todoId) return todo;
+    //   else return { ...todo, ...newTodoObj };
+    // });
+    // console.log(newTodoLists);
+    const newTodoLists = allTodos.reduce((acc, todo) => {
+      if (todo.id !== todoId) acc.push(todo);
+      else acc.push({ ...todo, ...newTodoObj });
+      return acc;
+    }, []);
+
+    setAllTodos(newTodoLists);
   };
 
   const generalLists = [
@@ -172,7 +188,8 @@ function App() {
           <TodoLists
             data={allTodos}
             deleteTodo={deleteTodo}
-            toggleTodo={toggleTodo}
+            // toggleTodo={toggleTodo}
+            editTodo={editTodo}
           />
         </main>
       </div>

@@ -6,12 +6,17 @@ import dayjs from "dayjs";
 import TodoForm from "./TodoForm";
 import styles from "./TodoItem.module.scss";
 
-function TodoItem(props) {
-  const { id, task, done, date, deleteTodo, toggleTodo } = props;
+function TodoItem({ id, task, done, date, deleteTodo, toggleTodo, editTodo }) {
   const [isOpenForm, setIsOpenForm] = useState(false);
+
   // console.log(id);
   const handleClick = () => {
     return setIsOpenForm(!isOpenForm);
+  };
+
+  const toggleStatus = () => {
+    const newTodoObj = { id, task, status: !done, date };
+    editTodo(id, newTodoObj);
   };
 
   return (
@@ -24,7 +29,8 @@ function TodoItem(props) {
             className={`${styles.todo__checkbox} ${
               done ? styles.todo__checkbox__done : ""
             }`}
-            onClick={() => toggleTodo(id, done)}
+            // onClick={() => toggleTodo(id, done)}
+            onClick={toggleStatus}
           >
             <HiOutlineCheck className={styles.todo__checkbox__icon} />
           </div>
@@ -32,7 +38,8 @@ function TodoItem(props) {
             className={`${styles.todo__task} ${
               done ? styles.todo__task__done : ""
             }`}
-            onClick={() => toggleTodo(id, done)}
+            // onClick={() => toggleTodo(id, done)}
+            onClick={toggleStatus}
           >
             {task}
           </p>
