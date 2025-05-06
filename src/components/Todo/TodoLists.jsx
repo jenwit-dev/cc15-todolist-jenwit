@@ -1,11 +1,19 @@
 import TodoItem from "./TodoItem";
 import styles from "./TodoLists.module.scss";
 
-function TodoLists(props) {
+function TodoLists({ data, deleteTodo, toggleTodo }) {
   return (
     <ul className={styles.todo__lists}>
-      {props.data.map(({ id, task, status, due_date }) => (
-        <TodoItem key={id} task={task} done={status} date={due_date} id={id} />
+      {data.map(({ id, task, status, due_date }) => (
+        <TodoItem
+          key={id}
+          task={task}
+          done={status}
+          date={due_date}
+          id={id}
+          deleteTodo={deleteTodo}
+          toggleTodo={toggleTodo}
+        />
       ))}
     </ul>
   );

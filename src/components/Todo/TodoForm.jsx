@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { nanoid } from "nanoid";
 
 import { Button } from "../common/button/Button";
 import styles from "./TodoForm.module.scss";
@@ -20,21 +19,15 @@ function TodoForm(props) {
       setIsError(true);
       return;
     }
-    console.log("submit");
+    // console.log("submit");
 
-    const newTodo = {
-      id: nanoid(),
-      task: taskInput,
-      status: false,
-      due_date: "2025-05-05",
-    };
-    const newTodoLists = [newTodo, ...props.data];
-    props.setTodo(newTodoLists);
+    // const newTodoLists = [newTodo, ...props.data];
+    props.addTodo(taskInput);
     props.setIsOpenForm(false);
   };
 
   const handleCancel = function (event) {
-    console.log("cancel");
+    // console.log("cancel");
     props.setIsOpenForm(false);
     // setIsCancel(!isCancel);
   };

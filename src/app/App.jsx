@@ -7,6 +7,9 @@ import {
   FaCalendarAlt,
   FaChevronDown,
 } from "react-icons/fa";
+import { nanoid } from "nanoid";
+import dayjs from "dayjs";
+
 import Header from "../components/Header";
 import ListItem from "../components/ListItem.jsx";
 import Lists from "../components/Lists.jsx";
@@ -17,19 +20,19 @@ import TodoForm from "../components/Todo/TodoForm.jsx";
 
 const data = [
   {
-    id: 1,
+    id: nanoid(),
     task: "Suspendisse potenti.",
     status: false,
     due_date: "2023-04-26",
   },
   {
-    id: 2,
+    id: nanoid(),
     task: "In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.",
     status: false,
     due_date: "2023-05-08",
   },
   {
-    id: 3,
+    id: nanoid(),
     task: "Aenean fermentum. Donec ut mauris eget massa tempor convallis.",
     status: false,
     due_date: "2023-04-30",
@@ -38,6 +41,41 @@ const data = [
 
 function App() {
   const [allTodos, setAllTodos] = useState(data);
+
+  const addTodo = (taskInput) => {
+    const newTodo = {
+      id: nanoid(),
+      task: taskInput,
+      status: false,
+      due_date: dayjs().format("D-M-YY"),
+    };
+
+    setAllTodos((prev) => [newTodo, ...prev]);
+  };
+
+  const deleteTodo = (todoId) => {
+    // return console.log(todoId);
+    // const index = allTodos.findIndex((item) => item.id === todoId);
+    setAllTodos((prev) => prev.filter((item) => item.id !== todoId));
+  };
+
+  const toggleTodo = (todoId, done) => {
+    // return console.log(todoId);
+    // return console.log(allTodos.findIndex((item) => item.id === todoId));
+    const newAllTodos = [...allTodos];
+    // return console.log(newAllTodos.findIndex((item) => item.id === todoId));
+    newAllTodos[newAllTodos.findIndex((item) => item.id === todoId)].status =
+      !done;
+    // return console.log(
+    //   newAllTodos[newAllTodos.findIndex((item) => item.id === todoId)]
+    // );
+    setAllTodos(newAllTodos);
+
+    // setAllTodos(
+    //   (prev) =>
+    //     (prev[prev.findIndex((item) => item.id === todoId)].status = !done)
+    // );
+  };
 
   const generalLists = [
     { id: 1, text: "Inbox", icon: <FaInbox />, active: true },
@@ -129,9 +167,13 @@ function App() {
           {/* Header */}
           <TodoHeader />
           {/* CreateTodo */}
-          <TodoCreate setTodo={setAllTodos} data={allTodos} />
+          <TodoCreate addTodo={addTodo} />
           {/* TodoLists */}
-          <TodoLists data={allTodos} />
+          <TodoLists
+            data={allTodos}
+            deleteTodo={deleteTodo}
+            toggleTodo={toggleTodo}
+          />
         </main>
       </div>
     </div>

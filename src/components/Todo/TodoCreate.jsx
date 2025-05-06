@@ -12,7 +12,7 @@ import styles from "./TodoCreate.module.scss";
 
 function TodoCreate(props) {
   const [isOpenForm, setIsOpenForm] = useState(false);
-  console.log(isOpenForm);
+  // console.log(isOpenForm);
 
   const handleClick = function (event) {
     // console.log("clicked");
@@ -25,8 +25,7 @@ function TodoCreate(props) {
         <TodoForm
           textSubmit="Add Task"
           setIsOpenForm={setIsOpenForm}
-          setTodo={props.setTodo}
-          data={props.data}
+          addTodo={props.addTodo}
         />
       ) : (
         <div className={styles.todo__create} onClick={handleClick}>
