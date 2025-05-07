@@ -5,7 +5,7 @@ import styles from "./TodoForm.module.scss";
 
 function TodoForm(props) {
   const [isError, setIsError] = useState(false);
-  const [taskInput, setTaskInput] = useState("");
+  const [taskInput, setTaskInput] = useState(props.oldTodo?.task || "");
 
   const handleChangeInput = function (event) {
     // console.log("typing...");
@@ -22,7 +22,8 @@ function TodoForm(props) {
     // console.log("submit");
 
     // const newTodoLists = [newTodo, ...props.data];
-    props.addTodo(taskInput);
+    if (props.addTodo) props.addTodo(taskInput);
+    else props.editTodo(props.oldTodo.id, { task: taskInput });
     props.setIsOpenForm(false);
   };
 

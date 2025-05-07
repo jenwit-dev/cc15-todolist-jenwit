@@ -89,7 +89,6 @@ function App() {
       else acc.push({ ...todo, ...newTodoObj });
       return acc;
     }, []);
-
     setAllTodos(newTodoLists);
   };
 
