@@ -93,7 +93,7 @@ function App() {
   };
 
   const generalLists = [
-    { id: 1, text: "Inbox", icon: <FaInbox />, active: true },
+    { id: 1, text: "Inbox", icon: <FaInbox />, active: false },
     { id: 2, text: "Today", icon: <FaCalendar />, active: false },
     { id: 3, text: "Next 7 Days", icon: <FaCalendarAlt />, active: false },
   ];
@@ -101,7 +101,7 @@ function App() {
   // <ListItem text="Project-A" icon={<FaInbox />} active={true} />
   // <ListItem text="Project-B" icon={<FaInbox />} active={false} />;
   const projectLists = [
-    { id: 4, text: "Project-A", icon: <FaInbox />, active: true },
+    { id: 4, text: "Project-A", icon: <FaInbox />, active: false },
     { id: 5, text: "Project-B", icon: <FaInbox />, active: false },
   ];
 
