@@ -5,10 +5,11 @@ import dayjs from "dayjs";
 
 import TodoForm from "./TodoForm";
 import styles from "./TodoItem.module.scss";
+import useTodo from "../../hooks/useTodo";
 
-function TodoItem({ id, task, done, date, deleteTodo, toggleTodo, editTodo }) {
+function TodoItem({ id, task, done, date }) {
   const [isOpenForm, setIsOpenForm] = useState(false);
-
+  const { deleteTodo, editTodo } = useTodo();
   // console.log(id);
   const handleClick = () => {
     return setIsOpenForm(!isOpenForm);
