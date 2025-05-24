@@ -1,5 +1,4 @@
 import "./App.scss";
-import { useState, useEffect, useContext } from "react";
 import {
   FaHome,
   FaInbox,
@@ -15,10 +14,6 @@ import Lists from "../components/Lists.jsx";
 import TodoHeader from "../components/Todo/TodoHeader.jsx";
 import TodoCreate from "../components/Todo/TodoCreate.jsx";
 import TodoLists from "../components/Todo/TodoLists.jsx";
-import TodoForm from "../components/Todo/TodoForm.jsx";
-import useTodo from "../hooks/useTodo.js";
-import { TodoContext } from "../context/TodoContext.js";
-import TodoContextProvider from "../context/TodoContext.js";
 
 // const data = [
 //   {
@@ -40,16 +35,16 @@ import TodoContextProvider from "../context/TodoContext.js";
 //     due_date: "2023-04-30",
 //   },
 // ];
-const BASE_URL = "http://localhost:8080/api/todos";
 
 function App() {
-  const { allTodos, addTodo, fetchAllTodos, editTodo, deleteTodo } = useTodo();
-  const sharedObj = useContext(TodoContext);
-  console.log(sharedObj);
+  // const { allTodos, addTodo, fetchAllTodos, editTodo, deleteTodo } = useTodo();
 
-  useEffect(() => {
-    fetchAllTodos();
-  }, []);
+  // const sharedObj = useContext(TodoContext);
+  // console.log(sharedObj);
+
+  // useEffect(() => {
+  //   fetchAllTodos();
+  // }, []);
 
   // const toggleTodo = (todoId, done) => {
   //   // return console.log(todoId);
@@ -156,17 +151,9 @@ function App() {
       </div>
       <div className="todo__content">
         <main className="todo__container">
-          {/* Header */}
           <TodoHeader />
-          {/* CreateTodo */}
-          <TodoCreate addTodo={addTodo} />
-          {/* TodoLists */}
-          <TodoLists
-            data={allTodos}
-            deleteTodo={deleteTodo}
-            // toggleTodo={toggleTodo}
-            editTodo={editTodo}
-          />
+          <TodoCreate />
+          <TodoLists />
         </main>
       </div>
     </div>

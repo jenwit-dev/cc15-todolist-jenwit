@@ -1,15 +1,18 @@
 import { HiOutlineCheck } from "react-icons/hi";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { FaPen, FaTrashAlt } from "react-icons/fa";
 import dayjs from "dayjs";
 
 import TodoForm from "./TodoForm";
 import styles from "./TodoItem.module.scss";
 import useTodo from "../../hooks/useTodo";
+import { TodoContext } from "../../context/TodoContext";
 
 function TodoItem({ id, task, done, date }) {
   const [isOpenForm, setIsOpenForm] = useState(false);
   const { deleteTodo, editTodo } = useTodo();
+  // const { deleteTodo, editTodo } = useContext(TodoContext);
+
   // console.log(id);
   const handleClick = () => {
     return setIsOpenForm(!isOpenForm);
