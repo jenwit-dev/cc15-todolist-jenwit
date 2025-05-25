@@ -11,9 +11,7 @@ import { TodoContext } from "../../context/TodoContext";
 function TodoItem({ id, task, done, date }) {
   const [isOpenForm, setIsOpenForm] = useState(false);
   const { deleteTodo, editTodo } = useTodo();
-  // const { deleteTodo, editTodo } = useContext(TodoContext);
 
-  // console.log(id);
   const handleClick = () => {
     return setIsOpenForm(!isOpenForm);
   };

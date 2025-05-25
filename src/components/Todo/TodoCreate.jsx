@@ -12,10 +12,8 @@ import styles from "./TodoCreate.module.scss";
 
 function TodoCreate() {
   const [isOpenForm, setIsOpenForm] = useState(false);
-  // console.log(isOpenForm);
 
   const handleClick = function (event) {
-    // console.log("clicked");
     setIsOpenForm(!isOpenForm);
   };
 

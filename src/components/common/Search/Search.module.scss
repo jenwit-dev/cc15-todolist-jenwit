@@ -1,15 +1,12 @@
-@import "../index.scss";
+@import "../../../index.scss";
 
 .search {
   position: relative;
-  //   border: 2px solid pink;
 
   &__icon {
     position: absolute;
     left: 5px;
     top: 28%;
-    // top: 50%;
-    // transform: translateY(-50%);
     font-size: 1.3rem;
     color: $grey-dark;
     display: flex;

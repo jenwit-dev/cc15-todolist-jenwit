@@ -10,6 +10,14 @@ const TodoContext = createContext();
 // Setup Context ฝั่ง Provider
 function TodoContextProvider(props) {
   const [allTodos, setAllTodos] = useState([]);
+  const [showTodos, setShowTodos] = useState([]);
+
+  const searchTodo = (keyword) => {
+    const newShowTodos = allTodos.filter((todoObj) => {
+      return todoObj.task.toLowerCase().includes(keyword.toLowerCase());
+    });
+    setShowTodos(newShowTodos);
+  };
 
   const fetchAllTodos = async () => {
     try {
@@ -17,13 +25,13 @@ function TodoContextProvider(props) {
         method: "GET",
       });
       const todoData = await response.json();
-      // console.log(todoData);
       const newTodoLists = todoData.todos.map((todo) => {
         const newTodo = { ...todo, due_date: todo.date };
         delete todo.date;
         return newTodo;
       });
       setAllTodos(newTodoLists);
+      setShowTodos(newTodoLists);
     } catch (err) {
       console.log(err);
     }
@@ -35,7 +43,6 @@ function TodoContextProvider(props) {
 
   const addTodo = async (taskInput) => {
     const newTodo = {
-      // id: nanoid(),
       task: taskInput,
       status: false,
       due_date: dayjs().format("D-M-YY"),
@@ -50,23 +57,16 @@ function TodoContextProvider(props) {
       };
       const response = await fetch(BASE_URL, option);
       const data = await response.json();
-      // console.log(data);
       setAllTodos((prev) => [data.todo, ...prev]);
+      setShowTodos((prev) => [data.todo, ...prev]);
     } catch (err) {
       console.log(err);
     }
   };
 
   const editTodo = async (todoId, newTodoObj) => {
-    // console.log(newTodoObj);
-    // console.log(todoId, newTodoObj);
-    // const newTodoLists = allTodos.map((todo) => {
-    //   if (todo.id !== todoId) return todo;
-    //   else return { ...todo, ...newTodoObj };
-    // });
-    // console.log(newTodoLists);
-
     // Format not compatible with objects for sending HTTP request (not array but it has to be object with required task and status keys according to API doc)
+
     // const newTodoLists = allTodos.reduce((acc, todo) => {
     //   if (todo.id !== todoId) acc.push(todo);
     //   else acc.push({ ...todo, ...newTodoObj });
@@ -86,10 +86,10 @@ function TodoContextProvider(props) {
         };
         const response = await fetch(`${BASE_URL}/${todoId}`, option);
         const data = await response.json();
-        // console.log(data);
         const newTodoLists = [...allTodos];
         newTodoLists[foundIndex] = data.todo;
         setAllTodos(newTodoLists);
+        setShowTodos(newTodoLists);
       }
     } catch (err) {
       console.log(err);
@@ -97,25 +97,25 @@ function TodoContextProvider(props) {
   };
 
   const deleteTodo = async (todoId) => {
-    // return console.log(todoId);
-    // const index = allTodos.findIndex((item) => item.id === todoId);
     try {
       const response = await fetch(`${BASE_URL}/${todoId}`, {
         method: "DELETE",
       });
       setAllTodos((prev) => prev.filter((item) => item.id !== todoId));
+      setShowTodos((prev) => prev.filter((item) => item.id !== todoId));
     } catch (err) {
       console.log(err);
     }
   };
 
   const sharedObj = {
-    value: 5,
     allTodos,
+    showTodos,
     addTodo,
     fetchAllTodos,
     editTodo,
     deleteTodo,
+    searchTodo,
   };
 
   return (

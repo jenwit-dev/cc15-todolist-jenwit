@@ -6,12 +6,11 @@ import styles from "./TodoLists.module.scss";
 import useTodo from "../../hooks/useTodo";
 
 function TodoLists() {
-  // const { allTodos } = useContext(TodoContext);
-  const { allTodos } = useTodo();
+  const { showTodos } = useTodo();
 
   return (
     <ul className={styles.todo__lists}>
-      {allTodos.map(({ id, task, status, due_date }) => (
+      {showTodos.map(({ id, task, status, due_date }) => (
         <TodoItem key={id} task={task} done={status} date={due_date} id={id} />
       ))}
     </ul>

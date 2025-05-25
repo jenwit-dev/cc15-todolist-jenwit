@@ -11,7 +11,6 @@ function TodoForm(props) {
   // const { addTodo, editTodo } = useContext(TodoContext);
 
   const handleChangeInput = function (event) {
-    // console.log("typing...");
     if (isError) setIsError(false);
     setTaskInput(event.target.value);
   };
@@ -22,20 +21,14 @@ function TodoForm(props) {
       setIsError(true);
       return;
     }
-    // console.log("submit");
 
-    // const newTodoLists = [newTodo, ...props.data];
-    // if (props.addTodo) props.addTodo(taskInput);
-    // else props.editTodo(props.oldTodo.id, { task: taskInput });
     if (props.oldTodo) editTodo(props.oldTodo.id, { task: taskInput });
     else addTodo(taskInput);
     props.setIsOpenForm(false);
   };
 
   const handleCancel = function (event) {
-    // console.log("cancel");
     props.setIsOpenForm(false);
-    // setIsCancel(!isCancel);
   };
 
   return (
