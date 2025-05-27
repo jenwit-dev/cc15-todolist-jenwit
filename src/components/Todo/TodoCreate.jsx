@@ -2,18 +2,11 @@ import { useState } from "react";
 
 import TodoForm from "./TodoForm";
 import styles from "./TodoCreate.module.scss";
-// function CreateTodo() {
-//   return <div>CreateTodo</div>;
-// }
-
-// export default CreateTodo;
-
-// JS value ไม่สามารถทำให้ React Rerender ได้
 
 function TodoCreate() {
   const [isOpenForm, setIsOpenForm] = useState(false);
 
-  const handleClick = function (event) {
+  const handleClick = function () {
     setIsOpenForm(!isOpenForm);
   };
 

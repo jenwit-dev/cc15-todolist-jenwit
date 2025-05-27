@@ -8,7 +8,6 @@ function TodoForm(props) {
   const [isError, setIsError] = useState(false);
   const [taskInput, setTaskInput] = useState(props.oldTodo?.task || "");
   const { addTodo, editTodo } = useTodo();
-  // const { addTodo, editTodo } = useContext(TodoContext);
 
   const handleChangeInput = function (event) {
     if (isError) setIsError(false);
@@ -27,7 +26,7 @@ function TodoForm(props) {
     props.setIsOpenForm(false);
   };
 
-  const handleCancel = function (event) {
+  const handleCancel = function () {
     props.setIsOpenForm(false);
   };
 

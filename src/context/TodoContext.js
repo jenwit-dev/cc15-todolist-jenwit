@@ -1,8 +1,10 @@
 import { createContext } from "react";
 import { useState, useEffect } from "react";
 import dayjs from "dayjs";
+import axios from "axios";
 
 const BASE_URL = "http://localhost:8080/api/todos";
+axios.defaults.baseURL = "http://localhost:8080/api";
 
 // ชื่อ context
 const TodoContext = createContext();
@@ -13,6 +15,7 @@ function TodoContextProvider(props) {
   const [showTodos, setShowTodos] = useState([]);
 
   const searchTodo = (keyword) => {
+    if (keyword.trim() === "") setShowTodos(allTodos);
     const newShowTodos = allTodos.filter((todoObj) => {
       return todoObj.task.toLowerCase().includes(keyword.toLowerCase());
     });
@@ -21,11 +24,8 @@ function TodoContextProvider(props) {
 
   const fetchAllTodos = async () => {
     try {
-      const response = await fetch(BASE_URL, {
-        method: "GET",
-      });
-      const todoData = await response.json();
-      const newTodoLists = todoData.todos.map((todo) => {
+      const { data } = await axios.get("/todos");
+      const newTodoLists = data.todos.map((todo) => {
         const newTodo = { ...todo, due_date: todo.date };
         delete todo.date;
         return newTodo;
@@ -48,15 +48,8 @@ function TodoContextProvider(props) {
       due_date: dayjs().format("D-M-YY"),
     };
     try {
-      const option = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newTodo),
-      };
-      const response = await fetch(BASE_URL, option);
-      const data = await response.json();
+      const { data } = await axios.post("/todos", newTodo);
+
       setAllTodos((prev) => [data.todo, ...prev]);
       setShowTodos((prev) => [data.todo, ...prev]);
     } catch (err) {
@@ -65,27 +58,12 @@ function TodoContextProvider(props) {
   };
 
   const editTodo = async (todoId, newTodoObj) => {
-    // Format not compatible with objects for sending HTTP request (not array but it has to be object with required task and status keys according to API doc)
-
-    // const newTodoLists = allTodos.reduce((acc, todo) => {
-    //   if (todo.id !== todoId) acc.push(todo);
-    //   else acc.push({ ...todo, ...newTodoObj });
-    //   return acc;
-    // }, []);
-    // setAllTodos(newTodoLists);
     try {
       const foundIndex = allTodos.findIndex((todo) => todo.id === todoId);
       if (foundIndex !== -1) {
         const requestObj = { ...allTodos[foundIndex], ...newTodoObj };
-        const option = {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(requestObj),
-        };
-        const response = await fetch(`${BASE_URL}/${todoId}`, option);
-        const data = await response.json();
+
+        const { data } = await axios.put(`/todos/${todoId}`, requestObj);
         const newTodoLists = [...allTodos];
         newTodoLists[foundIndex] = data.todo;
         setAllTodos(newTodoLists);
@@ -98,11 +76,11 @@ function TodoContextProvider(props) {
 
   const deleteTodo = async (todoId) => {
     try {
-      const response = await fetch(`${BASE_URL}/${todoId}`, {
-        method: "DELETE",
-      });
-      setAllTodos((prev) => prev.filter((item) => item.id !== todoId));
-      setShowTodos((prev) => prev.filter((item) => item.id !== todoId));
+      const response = await axios.delete(`/todos/${todoId}`);
+      if (response.status === 204) {
+        setAllTodos((prev) => prev.filter((item) => item.id !== todoId));
+        setShowTodos((prev) => prev.filter((item) => item.id !== todoId));
+      }
     } catch (err) {
       console.log(err);
     }

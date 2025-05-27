@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import styles from "./Search.module.scss";
 import useTodo from "../../../hooks/useTodo";
@@ -7,9 +7,19 @@ function Search() {
   const [searchKeyword, setSearchKeyword] = useState("");
   const { searchTodo } = useTodo();
 
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      console.log("Search");
+      if (searchKeyword.trim() !== "") searchTodo(searchKeyword);
+    }, 1000);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [searchKeyword]);
+
   const handleChangeInput = (e) => {
     setSearchKeyword(e.target.value);
-    searchTodo(searchKeyword);
   };
 
   return (

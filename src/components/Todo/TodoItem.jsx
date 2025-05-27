@@ -1,12 +1,11 @@
 import { HiOutlineCheck } from "react-icons/hi";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { FaPen, FaTrashAlt } from "react-icons/fa";
 import dayjs from "dayjs";
 
 import TodoForm from "./TodoForm";
 import styles from "./TodoItem.module.scss";
 import useTodo from "../../hooks/useTodo";
-import { TodoContext } from "../../context/TodoContext";
 
 function TodoItem({ id, task, done, date }) {
   const [isOpenForm, setIsOpenForm] = useState(false);
@@ -36,7 +35,6 @@ function TodoItem({ id, task, done, date }) {
             className={`${styles.todo__checkbox} ${
               done ? styles.todo__checkbox__done : ""
             }`}
-            // onClick={() => toggleTodo(id, done)}
             onClick={toggleStatus}
           >
             <HiOutlineCheck className={styles.todo__checkbox__icon} />
@@ -45,7 +43,6 @@ function TodoItem({ id, task, done, date }) {
             className={`${styles.todo__task} ${
               done ? styles.todo__task__done : ""
             }`}
-            // onClick={() => toggleTodo(id, done)}
             onClick={toggleStatus}
           >
             {task}

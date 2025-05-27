@@ -20,15 +20,10 @@
     color: $grey-dark;
     height: 16px;
     width: 16px;
-    // display: flex;
-    // flex-basis: 160px;
     border: 1px solid $grey-dark;
     border-radius: 16px;
-    // text-align: center;
-    // line-height: 16px;
     position: absolute;
     top: 12px;
-    // background-color: aqua;
     &__icon {
       display: none;
     }
@@ -39,9 +34,6 @@
 
     &__done &__icon {
       display: inline;
-      // display: flex;
-      // justify-content: center;
-      // align-items: center;
     }
   }
   &__task {
@@ -52,8 +44,7 @@
       text-decoration: line-through;
     }
   }
-  &__date {
-  }
+
   &__action {
     flex-basis: 80px;
     display: flex;
